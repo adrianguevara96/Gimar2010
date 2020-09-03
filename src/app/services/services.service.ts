@@ -7,13 +7,13 @@ import swal from 'sweetalert';
 })
 export class ServicesService {
 
-  //url = "https://apijosgarm.herokuapp.com/api/";
+  url = "https://apijosgarm.herokuapp.com/api/";
   //url = "http://localhost:3001/api/";
-  url = "https://inversionesjosgar.com/api/";
+  //url = "https://inversionesjosgar.com/api/";
   
   user: any;
   business: any = {
-    nombre: 'Inversiones Y Servicios Josgar M, C.A'
+    nombre: 'Multiservicios Y Transporte Gimar2010 C.A'
   };
 
   constructor(public http: HttpClient) { }
