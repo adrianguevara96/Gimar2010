@@ -13,7 +13,7 @@
 [npm-coreui-badge]: https://img.shields.io/npm/v/@coreui/coreui.png?style=flat-square
 [npm-coreui-download]: https://img.shields.io/npm/dm/@coreui/coreui.svg?style=flat-square
 
-# Inversiones&Servicios Josgar M C.A
+# Multiservicios Y Transporte Gimar 2010 C.A
 
 This project was generated with Angular CLI version 7.0.3.
 
