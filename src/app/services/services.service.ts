@@ -7,8 +7,8 @@ import swal from 'sweetalert';
 })
 export class ServicesService {
 
-  //url = "https://apijosgarm.herokuapp.com/api/";
-  url = "http://localhost:3001/api/";
+  url = "https://apijosgarm.herokuapp.com/api/";
+  //url = "http://localhost:3001/api/";
   //url = "https://inversionesjosgar.com/api/";
   
   user: any;
