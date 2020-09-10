@@ -9,6 +9,7 @@ import { GuiascargasComponent } from './guiascargas/guiascargas.component';
 import { TrackingComponent } from './tracking/tracking.component';
 
 import { RoleGuardService } from './../../guards/role-guard.service';
+import { GuiasentregasComponent } from './guiasentregas/guiasentregas.component';
 
 const routes: Routes = [
   {
@@ -67,6 +68,14 @@ const routes: Routes = [
         component: TrackingComponent,
         data: {
           title: 'Tracking'
+        }
+      },
+      {
+        path: 'guiasentrega',
+        canActivate: [RoleGuardService],
+        component: GuiasentregasComponent,
+        data: {
+          title: 'Guías de Entrega'
         }
       }
     ]

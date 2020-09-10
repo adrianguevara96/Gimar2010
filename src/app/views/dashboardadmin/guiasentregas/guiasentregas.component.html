@@ -1,0 +1,264 @@
+<div class="animated fadeIn">
+    <ngx-spinner [fullScreen]="false" bdColor = "rgb(8,8,8)" type="pacman" size="medium">
+      <p class="loading" style="color: white">Cargando la factura...</p>
+    </ngx-spinner>
+    <div class="card">
+        <div class="card-header">
+            <div class="form-row">
+                <div class="col-8">
+                    <h3 style="margin-bottom: 0px;"><b>Guías de Entrega</b></h3>
+                </div>
+                <div class="col-4">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="col-7">
+                    <label for="ordencarga"><b>Guía de Carga</b></label><br>
+                    <input type="text" [(ngModel)]="nroGuiaCarga" class="form-control" id="ordencarga" placeholder="Indique el nro. de la guía de carga a buscar">
+                </div>
+                <div class="col-4">
+                    <label class="invisible" for="ordencarga">Orden de Carga</label><br>
+                    <button (click)="getFacturasxNroGuiaCarga()" type="button" class="btn btn btn-primary btn-sm btn-pill" tooltip="Buscar guía de carga" placement="right">
+                        <svg-icon src="assets/search.svg" [svgStyle]="{ 'height.px':25,'width.px':25, 'fill':'rgb(255,255,255)'  }"></svg-icon><span style="color:white; font-weight: bold;"> Buscar</span>
+                    </button>
+                </div>
+            </div>
+            <hr>
+                <div *ngIf="mostrarTabla" class="form-row">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nro. Factura</th>
+                                    <th>Remitente</th>
+                                    <th>Destinatario</th>
+                                    <th>Bultos</th>
+                                    <th>Flete destino</th>
+                                    <th>Monto</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let fact of facturas">
+                                    <td>{{fact.nrof}}</td>
+                                    <td>{{fact.remitente}}</td>
+                                    <td>{{fact.destinatario}}</td>
+                                    <td>{{fact.bultos}}</td>
+                                    <td>{{fact.fletedestino}}</td>
+                                    <td>{{fact.valor | number: '1.0-2'}} BsS</td>
+                                    <td>
+                                        <button type="button" (click)="agregarFormGuiaEntrega(fact)" tooltip="Añadir a Guia de Entrega" placement="left" style="border-radius:60px" class="btn btn-sm btn-pill">
+                                            <svg-icon src="assets/add2.svg" [svgStyle]="{ 'height.px':20,'width.px':20 }">
+                                            </svg-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            <form *ngIf="mostrarForm" [formGroup]="guiasEntregaForm" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <!--   REMITENTE  -->
+                    <div class="col-3">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="nombres"><b>Remitente</b></label>
+                            <input formControlName="remitente" type="text" class="form-control" placeholder="Nombre del Remitente" required>
+                        </div>
+                        <div *ngIf="guiasEntregaForm.controls['remitente'].invalid &&(guiasEntregaForm.controls['remitente'].dirty || guiasEntregaForm.controls['remitente'].touched)" class="text-danger">
+                            <div *ngIf="guiasEntregaForm.controls['remitente'].errors.required">
+                                Ingrese el nombre del remitente
+                            </div>
+                        </div>
+                    </div>
+                    <!--   RIF  -->
+                    <div class="col-3">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="apellidos"><b>Rif</b></label>
+                            <input formControlName="rifremitente" type="text" class="form-control" placeholder="Rif del Remitente" required>
+                        </div>
+                        <div *ngIf="guiasEntregaForm.controls['rifremitente'].invalid &&(guiasEntregaForm.controls['rifremitente'].dirty || guiasEntregaForm.controls['rifremitente'].touched)" class="text-danger">
+                            <div *ngIf="guiasEntregaForm.controls['rifremitente'].errors.required">
+                                Ingrese el rif del remitente
+                            </div>
+                        </div>
+                    </div>
+                    <!--   DIRECCION  -->
+                    <div class="col-6">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="apellidos"><b>Dirección</b></label>
+                            <input formControlName="direccion" type="text" class="form-control" placeholder="Dirección del Remitente" required>
+                        </div>
+                        <div *ngIf="guiasEntregaForm.controls['direccion'].invalid &&(guiasEntregaForm.controls['direccion'].dirty || guiasEntregaForm.controls['direccion'].touched)" class="text-danger">
+                            <div *ngIf="guiasEntregaForm.controls['direccion'].errors.required">
+                                Ingrese la dirección del remitente
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <!--   DESTINATARIO  -->
+                    <div class="col-3">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="nombres"><b>Destinatario</b></label>
+                            <input formControlName="destinatario" type="text" class="form-control" placeholder="Nombre del Destinatario" required>
+                        </div>
+                        <div *ngIf="guiasEntregaForm.controls['destinatario'].invalid &&(guiasEntregaForm.controls['destinatario'].dirty || guiasEntregaForm.controls['destinatario'].touched)" class="text-danger">
+                            <div *ngIf="guiasEntregaForm.controls['destinatario'].errors.required">
+                                Ingrese el nombre del destinatario
+                            </div>
+                        </div>
+                    </div>
+                    <!--   RIF  -->
+                    <div class="col-3">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="apellidos"><b>Rif</b></label>
+                            <input formControlName="rifdestinatario" type="text" class="form-control" placeholder="Rif del Destinatario" required>
+                        </div>
+                        <div *ngIf="guiasEntregaForm.controls['rifdestinatario'].invalid &&(guiasEntregaForm.controls['rifdestinatario'].dirty || guiasEntregaForm.controls['rifdestinatario'].touched)" class="text-danger">
+                            <div *ngIf="guiasEntregaForm.controls['rifdestinatario'].errors.required">
+                                Ingrese el rif del destinatario
+                            </div>
+                        </div>
+                    </div>
+                    <!--   DIRECCION DESPACHO -->
+                    <div class="col-6">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="apellidos"><b>Dirección Despacho</b></label>
+                            <input formControlName="direcciondespacho" type="text" class="form-control" placeholder="Dirección de Despacho" required>
+                        </div>
+                        <div *ngIf="guiasEntregaForm.controls['direcciondespacho'].invalid &&(guiasEntregaForm.controls['direcciondespacho'].dirty || guiasEntregaForm.controls['direcciondespacho'].touched)" class="text-danger">
+                            <div *ngIf="guiasEntregaForm.controls['direcciondespacho'].errors.required">
+                                Ingrese la dirección de despacho
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <!--  BULTOS  -->
+                    <div class="col-2">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="tlfijo"><b>Bultos</b></label>
+                            <input formControlName="bultos" type="number" class="form-control" placeholder="Bultos" required>
+                        </div>
+                        <div *ngIf="guiasEntregaForm.controls['bultos'].invalid &&(guiasEntregaForm.controls['bultos'].dirty || guiasEntregaForm.controls['bultos'].touched)" class="text-danger">
+                            <div *ngIf="guiasEntregaForm.controls['bultos'].errors.required">
+                                Ingrese la cantidad de bultos
+                            </div>
+                        </div>
+                    </div>
+                    <!--   FLETE DESTINO  -->
+                    <div class="col-1">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="tlfmovil"><b>F. Destino</b></label>
+                            <input type="text" formControlName="fletedestino" class="form-control" placeholder="Flete destino" required>
+                        </div>
+                        <div *ngIf="guiasEntregaForm.controls['fletedestino'].invalid &&(guiasEntregaForm.controls['fletedestino'].dirty || guiasEntregaForm.controls['fletedestino'].touched)" class="text-danger">
+                            <div *ngIf="guiasEntregaForm.controls['fletedestino'].errors.required">
+                                Indique flete destino
+                            </div>
+                        </div>
+                    </div>
+                    <!--   MONTO FACTURA  -->
+                    <div class="col-3">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="monto"><b>Monto Factura: {{monto.value | number: '1.0-2'}} BsS</b></label>
+                            <input name="monto" #monto type="number" formControlName="monto" class="form-control" placeholder="Monto Factura" required>
+                        </div>
+                        <div *ngIf="guiasEntregaForm.controls['monto'].invalid &&(guiasEntregaForm.controls['monto'].dirty || guiasEntregaForm.controls['monto'].touched)" class="text-danger">
+                            <div *ngIf="guiasEntregaForm.controls['monto'].errors.required">
+                                Indique el monto de la factura
+                            </div>
+                        </div>
+                    </div>
+                    <!--   MONTO FLETE  -->
+                    <div class="col-3">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="montoflete"><b>Monto Flete: {{montoflete.value | number: '1.0-2'}} BsS</b></label>
+                            <input name="montoflete" #montoflete type="number" formControlName="montoflete" class="form-control" placeholder="Monto Flete" required>
+                        </div>
+                        <div *ngIf="guiasEntregaForm.controls['montoflete'].invalid &&(guiasEntregaForm.controls['montoflete'].dirty || guiasEntregaForm.controls['montoflete'].touched)" class="text-danger">
+                            <div *ngIf="guiasEntregaForm.controls['montoflete'].errors.required">
+                                Indique el monto del flete
+                            </div>
+                        </div>
+                    </div>
+                    <!--  MONTO TOTAL  -->
+                    <div class="col-3">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="montofact"><b>Monto Total: {{montototal | number: '1.0-2'}} BsS</b></label>
+                            <input type="number" [(ngModel)]="montototal" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Monto Total">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12">
+                        <!--   OBSERVACION  -->
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="apellidos"><b>Observación</b></label>
+                            <input formControlName="observacion" type="text" class="form-control" placeholder="Observación">
+                        </div>
+                    </div>
+                </div>
+
+                <!--
+                <div class="form-row"> -->
+                    <!--   DIRECCION FISCAL  -->
+                   <!-- <div class="col-4">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="dirfiscal">Dirección Fiscal</label>
+                            <input formControlName="dirfiscal" type="text" class="form-control" placeholder="Ingrese su dir. fiscal">
+                        </div>
+                        <div *ngIf="profileForm.controls['dirfiscal'].invalid &&(profileForm.controls['dirfiscal'].dirty || profileForm.controls['dirfiscal'].touched)" class="text-danger">
+                            <div *ngIf="profileForm.controls['dirfiscal'].errors.required">
+                                Ingrese su dir. fiscal
+                            </div>
+                        </div>
+                    </div> -->
+                    <!--   ESTADO  -->
+                   <!-- <div class="col-4">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="estado">Estado</label>
+                            <select (change)="CiudadxEstado($event.target.value)" formControlName="estado" class="form-control" required>
+                                <option *ngFor="let esta of estados" [value]="esta.id">
+                                    {{esta.nombre}}
+                                </option>
+                            </select>
+                        </div>
+                        <div *ngIf="profileForm.controls['estado'].invalid &&(profileForm.controls['estado'].dirty || profileForm.controls['estado'].touched)" class="text-danger">
+                            <div *ngIf="profileForm.controls['estado'].errors.required">
+                                Escoja un Estado
+                            </div>
+                        </div>
+                    </div> -->
+                    <!--   CIUDAD  -->
+                   <!-- <div class="col-4">
+                        <div class="form-group" style="margin-bottom: 0.3rem;">
+                            <label for="ciudad">Ciudad</label>
+                            <select formControlName="ciudad" class="form-control" required>
+                                <option *ngFor="let ciu of ciudadxEstado" [value]="ciu.id">
+                                    {{ciu.nombre}}
+                                </option>
+                            </select>
+                        </div>
+                        <div *ngIf="profileForm.controls['ciudad'].invalid &&(profileForm.controls['ciudad'].dirty || profileForm.controls['ciudad'].touched)" class="text-danger">
+                            <div *ngIf="profileForm.controls['ciudad'].errors.required">
+                                Escoja una Ciudad
+                            </div>
+                        </div>
+                    </div> -->
+               <!-- </div>  -->
+                <div class="form-row">
+                    <div class="col-12" align="center">
+                        <button [disabled]="!crearGuia" style="border-radius:60px;position:relative;" class="btn btn-primary">
+                            <span style="color:white; font-weight: bold;"> Crear Guía de Entrega</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -22,6 +22,7 @@ import { SolicitudesrecolectasComponent } from './solicitudesrecolectas/solicitu
 import { RelacionesdespachosComponent } from './relacionesdespachos/relacionesdespachos.component';
 import { GuiascargasComponent } from './guiascargas/guiascargas.component';
 import { TrackingComponent } from './tracking/tracking.component';
+import { GuiasentregasComponent } from './guiasentregas/guiasentregas.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,6 @@ import { TrackingComponent } from './tracking/tracking.component';
   providers: [
   DefaultLayoutComponent
 ],
-  declarations: [ DashboardadminComponent, UsersComponent, SolicitudesrecolectasComponent, RelacionesdespachosComponent, GuiascargasComponent, TrackingComponent ]
+  declarations: [ DashboardadminComponent, UsersComponent, SolicitudesrecolectasComponent, RelacionesdespachosComponent, GuiascargasComponent, TrackingComponent, GuiasentregasComponent ]
 })
 export class DashboardadminModule { }

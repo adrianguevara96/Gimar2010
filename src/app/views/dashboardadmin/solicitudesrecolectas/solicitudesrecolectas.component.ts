@@ -161,7 +161,7 @@ export class SolicitudesrecolectasComponent implements OnInit {
     this.service.get(`users/solicitudesrecolecta`).then((result) =>{
       this.data = result;
       if(this.data.message == "No existen solicitudes de recolecta en la BD."){
-        swal("No existen solicitudes de recolecta", "info");
+        swal("","No existen solicitudes de recolecta", "info");
       }else if(this.data.length>0){
         this.solicitudesrecolecta = [];
         this.solicitudesrecolecta = this.data;

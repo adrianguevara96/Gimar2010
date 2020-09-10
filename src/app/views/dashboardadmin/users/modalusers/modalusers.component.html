@@ -308,10 +308,10 @@
                             <div class="col-12" align="center">
                                 <!-- PARA CREAR USUARIO -->
                                 <div *ngIf="accion == 'create' " class="form-group" style="margin-bottom: 0.3rem;">
-                                    <button type="submit" class="btn btn-success">Crear Usuario</button>
+                                    <button type="submit" style="font-weight: bold;" class="btn btn-primary">Crear Usuario</button>
                                 </div>
                                 <div *ngIf="accion == 'edit' " class="form-group" style="margin-bottom: 0.3rem;">
-                                    <button (click)="modifyUser()" type="button" class="btn btn-success">Editar Usuario</button>
+                                    <button (click)="modifyUser()" style="font-weight: bold;" type="button" class="btn btn-primary">Editar Usuario</button>
                                 </div>
                             </div>
                         </div>

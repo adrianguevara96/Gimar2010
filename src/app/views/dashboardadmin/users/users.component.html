@@ -2,12 +2,12 @@
     <div class="card">
         <div class="card-header">
             <div class="form-row">
-                <div class="col-10">
+                <div class="col-9">
                     <h3 style="margin-bottom: 0px;">Administracion de Usuarios</h3>
                 </div>
-                <div class="col-2" align="center">
-                    <button (click)="openModal('create',null)" class="btn btn-sm btn-pill" tooltip="Añadir Usuario" placement="left">
-                        <svg-icon src="assets/adduser2.svg" [svgStyle]="{ 'height.px':25,'width.px':25 }"></svg-icon> <span style="color:black">Añadir Usuario</span>
+                <div class="col-3" align="center">
+                    <button (click)="openModal('create',null)" style="border-radius:60px;position:relative;" class="btn btn-primary" tooltip="Añadir Usuario" placement="left">
+                        <svg-icon src="assets/adduser2.svg" [svgStyle]="{ 'height.px':25,'width.px':25, 'fill':'rgb(255,255,255)' }"></svg-icon> <span style="color:white; font-weight: bold;"> Añadir Usuario</span>
                     </button>
                 </div>
             </div>
