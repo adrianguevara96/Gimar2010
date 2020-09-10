@@ -150,9 +150,9 @@
                 <div class="form-row">
                     <!--   BOTON DE REGISTRAR Y LIMPIAR CAMPOS  -->
                     <div class="col-12" align="center">
-                        <button [hidden]="esconderBoton" type="submit" class="btn btn-primary" >Crear</button>
-                        <button [hidden]="esconderBoton" type="button" class="btn btn-danger" (click)="limpiar()">Limpiar</button>
-                        <button (click)="editarSolicitud()" *ngIf="accion == 'edit' " type="button" class="btn btn-success">Guardar</button>
+                        <button [hidden]="esconderBoton" style="font-weight: bold;" type="submit" class="btn btn-primary" >Crear</button>
+                        <button [hidden]="esconderBoton" style="font-weight: bold;" type="button" class="btn btn-danger" (click)="limpiar()">Limpiar</button>
+                        <button (click)="editarSolicitud()" *ngIf="accion == 'edit' " style="font-weight: bold;" type="button" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
                 <!--   FIN DEL FORMULARIO   -->

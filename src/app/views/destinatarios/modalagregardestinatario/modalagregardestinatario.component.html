@@ -162,7 +162,7 @@
                 </div>
                 <div class="col-4">
                     <div class="form-group" style="margin-bottom: 0.3rem;">
-                        <button [hidden]="esconderBoton" (click)="crearDestinatario()" type="button" class="btn btn-block btn-success">Guardar</button>
+                        <button [hidden]="esconderBoton" (click)="crearDestinatario()" type="button" style="border-radius:60px;position:relative;" class="btn btn-block btn-primary">Guardar</button>
                     </div>
                 </div>
                 <div class="col-4">
@@ -188,8 +188,8 @@
                                     <h5>Añadir dirección de entrega</h5>
                                 </div>
                                 <div class="col-3" align="center">
-                                    <button style="padding:0px" [hidden]="esconderBoton" type="submit" class="btn btn-sm btn-pill" tooltip="Añadir dirección de entrega" placement="left">
-                                        <svg-icon src="assets/add2.svg" [svgStyle]="{ 'height.px':15,'width.px':15 }"></svg-icon> <span style="color:black"> Añadir dirección</span>
+                                    <button style="border-radius:60px;position:relative;" [hidden]="esconderBoton" type="submit" class="btn btn-primary" tooltip="Añadir dirección de entrega" placement="left">
+                                        <svg-icon src="assets/add.svg" [svgStyle]="{ 'height.px':20,'width.px':20, 'fill':'rgb(255,255,255)' }"></svg-icon> <span style="color:white; font-weight: bold;"> Añadir dirección</span>
                                     </button>
                                 </div>
                             </div>

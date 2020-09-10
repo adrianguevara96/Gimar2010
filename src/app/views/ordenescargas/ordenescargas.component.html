@@ -15,14 +15,14 @@
         </div>
         <div class="card-body">
             <div class="form-row">
-                <div class="col-7">
+                <div class="col-8">
                     <label for="ordencarga">Relación de Despacho</label><br>
                     <input type="text" [(ngModel)]="buscarNroRelacionDespacho" class="form-control" id="ordencarga" placeholder="Indique el nro. de la relación de despacho a buscar">
                 </div>
                 <div class="col-4">
                     <label class="invisible" for="ordencarga">Orden de Carga</label><br>
                     <button (click)="buscarFacturasdeRelacionDespacho('edit')" type="button" class="btn btn btn-primary btn-sm btn-pill" tooltip="Buscar relación de despacho" placement="right">
-                      <svg-icon src="assets/search.svg" [svgStyle]="{ 'height.px':25,'width.px':25 }"></svg-icon>
+                      <svg-icon src="assets/search.svg" [svgStyle]="{ 'height.px':25,'width.px':25, 'fill':'rgb(255,255,255)' }"></svg-icon> <span style="color:white; font-weight: bold;"> Buscar</span>
                     </button>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                   </div>
                   <div class="col-3" align="center">
                     <button (click)="newRelacionDespacho('create')" tooltip="Añadir relación de despacho" placement="left" style="border-radius:60px;position:relative;" class="btn btn-primary">
-                      <svg-icon src="assets/anadirorden2.svg" [svgStyle]="{ 'height.px':25,'width.px':25 }"></svg-icon> <span style="color:black"> Añadir Relación</span>
+                      <svg-icon src="assets/anadirorden2.svg" [svgStyle]="{ 'height.px':25,'width.px':25, 'fill':'rgb(255,255,255)' }"></svg-icon> <span style="color:white; font-weight: bold;"> Añadir Relación</span>
                     </button>
                   </div>
                 </div>

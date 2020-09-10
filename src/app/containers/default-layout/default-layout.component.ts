@@ -36,7 +36,8 @@ export class DefaultLayoutComponent {
           {name: 'Relaciones de Despacho',url: '/administracion/relacionesdespachos',icon: 'icon-drop'},
           {name: 'Solicitudes de Recolectas',url: '/administracion/solicitudesrecolectas',icon: 'icon-drop'},
           {name: 'Guías de Carga',url: '/administracion/guiascarga',icon: 'icon-drop'},
-          {name: 'Tracking',url: '/administracion/tracking',icon: 'icon-drop'},
+          {name: 'Tracking',url: '/administracion/tracking',icon: 'fa fa-map-marker'},
+          {name: 'Guías de Entrega',url: '/administracion/guiasentrega',icon: 'icon-drop'},
           /*  {title: true,name: 'Theme'},
           {name: 'Colors',url: '/theme/colors',icon: 'icon-drop'},
           {name: 'Typography',url: '/theme/typography',icon: 'icon-pencil'},
@@ -102,7 +103,8 @@ export class DefaultLayoutComponent {
         {name: 'Relaciones de Despacho',url: '/administracion/relacionesdespachos',icon: 'icon-drop'},
         {name: 'Solicitudes de Recolectas',url: '/administracion/solicitudesrecolectas',icon: 'icon-drop'},
         {name: 'Guías de Carga',url: '/administracion/guiascarga',icon: 'icon-drop'},
-        {name: 'Tracking',url: '/administracion/tracking',icon: 'icon-drop'},)
+        {name: 'Tracking',url: '/administracion/tracking',icon: 'fa fa-map-marker'},
+        {name: 'Guías de Entrega',url: '/administracion/guiasentrega',icon: 'icon-drop'})
     //tipoUsuario = Usuario Comun
     }else{
       this.navItemsUser.splice(0);

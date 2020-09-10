@@ -17,12 +17,17 @@ export class RoleGuardService implements CanActivate {
   public canActivate() {
     this.role = this.service.getTipoU()
     
-    if(this.role == 3 || this.role == 2){
-      return true;
-    }else{
+    if(this.role == undefined){
       swal("Acceso Denegado", `Ud no posee accesos para esta ruta.`, "warning");
-      return false;
+      this.router.navigate(['/login']);
+      return false; 
+    }else{ 
+      if(this.role == 3 || this.role == 2){
+        return true;
+      }else{
+        swal("Acceso Denegado", `Ud no posee accesos para esta ruta.`, "warning");
+        return false;
+      }
     }
   }
-  
 }

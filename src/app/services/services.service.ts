@@ -7,8 +7,8 @@ import swal from 'sweetalert';
 })
 export class ServicesService {
 
-  url = "https://apijosgarm.herokuapp.com/api/";
-  //url = "http://localhost:3001/api/";
+  //url = "https://apijosgarm.herokuapp.com/api/";
+  url = "http://localhost:3001/api/";
   //url = "https://inversionesjosgar.com/api/";
   
   user: any;
@@ -175,7 +175,9 @@ export class ServicesService {
   }
 
   getTipoU(){
-    return this.user.tipousuario
+    if(this.user != null || this.user != undefined){
+      return this.user.tipousuario
+    } 
   }
   getBusiness(){
     return this.business;
