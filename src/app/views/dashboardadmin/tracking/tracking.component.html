@@ -17,7 +17,7 @@
                     <!-- Rutas -->
                     <div class="col-auto">
                         <div class="form-group" style="margin-bottom: 0.3rem;">
-                            <label for="estado">Ruta</label>
+                            <label for="estado"><b>Ruta</b></label>
                             <select (change)="CiudadesxRuta($event.target.value)" formControlName="ruta" class="form-control" required>
                                 <option value="0">-- Seleccione una Ruta --</option>
                                 <option *ngFor="let ru of rutas" [value]="ru.id">

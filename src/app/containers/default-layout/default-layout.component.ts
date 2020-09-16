@@ -28,6 +28,11 @@ export class DefaultLayoutComponent {
   setnavItems(valor:any){
     //tipoUsuario = Usuario Administrador
     if(valor == 3) {
+      setTimeout( () => {
+        let f = document.getElementsByClassName('nav navbar-nav d-md-down-none') as HTMLCollectionOf<HTMLElement>;
+        f[0].style.display = "none";
+      }, 10);
+
         this.navItemsUser.splice(0);
         this.navItemsUser.push(
           {title: true, name: 'Administración'},
@@ -95,6 +100,11 @@ export class DefaultLayoutComponent {
         )
     //tipoUsuario = Operador
     }else if(valor == 2){
+      setTimeout( () => {
+        let f = document.getElementsByClassName('nav navbar-nav d-md-down-none') as HTMLCollectionOf<HTMLElement>;
+        f[0].style.display = "none";
+      }, 10);
+
       this.navItemsUser.splice(0);
       this.navItemsUser.push(
         {title: true, name: 'Administración'},

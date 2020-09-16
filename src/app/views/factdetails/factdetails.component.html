@@ -1,0 +1,156 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="card mx-4">
+            <div class="card-body p-4">
+              <h1 style="text-align: center;">Tracking Público</h1>
+              <p style="text-align: center;" class="text-muted">Ingrese el n° de factura o el n° de guia de entrega a buscar.</p>
+
+              <form [formGroup]="publicTrackingForm" (ngSubmit)="onSubmit()" novalidate>
+              <div class="form-row">
+                <!--   GUIA O FACTURA  -->
+                <div class="col-12 text-center">
+                    <div class="form-group" style="margin-bottom: 0.3rem;">
+                        <div class="form-check form-check-inline mr-1">
+                            <label class="form-check-label" style="margin-bottom: 0px;"><strong>Indique una opción:</strong></label><br>
+
+                            <input (click)="placehold()" style="margin-left: 10px; width:15%;" type="radio" value="1" name="buscar" formControlName="buscar" class="form-control">
+                            <label style="margin-bottom: 0px;">Guía</label>
+                        </div><br>
+                    </div>
+                </div>
+              </div>
+              <div class="form-row">
+                  <div class="col-12">
+                      <div class="form-group" style="margin-bottom: 0.3rem;">
+                          <input style="position:relative;display: inline-block;width: 70%;" type="text" class="form-control" formControlName="inputBuscar" [placeholder]="placeholderInput">
+                          <button style="position:relative;display: inline-block;width: 29%;" type="submit" class="btn btn btn-primary btn-sm btn-pill" tooltip="Buscar nro. de factura" placement="right" data-toggle="modal">
+                            <svg-icon src="assets/search.svg" [svgStyle]="{ 'height.px':25,'width.px':25 }"></svg-icon><span style="color:black"> Buscar</span>
+                          </button>
+                      </div>
+                      <div *ngIf="publicTrackingForm.controls['inputBuscar'].invalid &&(publicTrackingForm.controls['inputBuscar'].dirty || publicTrackingForm.controls['inputBuscar'].touched)" class="text-danger">
+                          <div *ngIf="publicTrackingForm.controls['inputBuscar'].errors.required">
+                              Ingrese un nro a buscar
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <br>
+              <!--  N° Guía  -->
+              <div class="form-group" style="margin-bottom: 0.3rem; position: relative; width: 49%; display: inline-block">
+                <div class="input-group mb-1">
+                  <div class="input-group-prepend">
+                    <span style="max-width: 100px; min-width: 100px; font-size:0.9em" class="input-group-text">N° Guía</span>
+                  </div>
+                  <label class="form-control"> {{ searchedFact.nroguia }}</label>
+                </div>
+              </div>
+                  <!--  N° Factura  -->
+                  <div class="form-group" style="margin-bottom: 0.3rem; position: relative; width: 50%; display: inline-block">
+                    <div class="input-group mb-1">
+                      <div class="input-group-prepend">
+                        <span style="max-width: 100px; min-width: 100px; font-size:0.9em" class="input-group-text">N° Factura</span>
+                      </div>
+                      <label class="form-control"> {{ searchedFact.nrof }} </label>
+                    </div>
+                  </div>
+                  <!--  Remitente  -->
+                  <div class="form-group" style="margin-bottom: 0.3rem; position: relative; width: 49%; display: inline-block">
+                    <div class="input-group mb-1">
+                      <div class="input-group-prepend">
+                        <span style="max-width: 100px; min-width: 100px; font-size:0.9em" class="input-group-text">Remitente</span>
+                      </div>
+                      <label class="form-control"> {{ searchedFact.remitente }} </label>
+                    </div>
+                  </div>
+                  <!--  Destinatario  -->
+                  <div class="form-group" style="margin-bottom: 0.3rem; position: relative; width: 50%; display: inline-block">
+                    <div class="input-group mb-1">
+                      <div class="input-group-prepend">
+                        <span style="max-width: 100px; min-width: 100px; font-size:0.9em" class="input-group-text">Destinatario</span>
+                      </div>
+                      <label class="form-control"> {{ searchedFact.destinatario }} </label>
+                    </div>
+                  </div>
+                  <!--  Flete destino  -->
+                  <div class="form-group" style="margin-bottom: 0.3rem; position: relative; width: 49%; display: inline-block">
+                    <div class="input-group mb-1">
+                      <div class="input-group-prepend">
+                        <span style="max-width: 100px; min-width: 100px; font-size:0.9em" class="input-group-text">Flete destino</span>
+                      </div>
+                      <label class="form-control"> {{ searchedFact.fletedestino }} </label>
+                    </div>
+                  </div>
+                  <!--  Monto  -->
+                  <div class="form-group" style="margin-bottom: 0.3rem; position: relative; width: 50%; display: inline-block">
+                    <div class="input-group mb-1">
+                      <div class="input-group-prepend">
+                        <span style="max-width: 100px; min-width: 100px; font-size:0.9em" class="input-group-text">Monto</span>
+                      </div>
+                      <label class="form-control"> {{ searchedFact.valor | number: '1.0-2'}} BsS</label>
+                    </div>
+                  </div>
+                  <!--  Estado  -->
+                  <div class="form-group" style="margin-bottom: 0.3rem; position: relative; width: 49%; display: inline-block">
+                    <div class="input-group mb-1">
+                      <div class="input-group-prepend">
+                        <span style="max-width: 100px; min-width: 100px; font-size:0.9em;max-height: 35px;min-height: 35px;" class="input-group-text">Estado</span>
+                      </div>
+                      <label  class="form-control"> {{ searchedFact.estado }} </label>
+                      <!-- <div *ngFor="let est of estados">
+                        <label *ngIf="est.id == searchedFact.estado" class="form-control"> {{est.nombre}} </label>
+                      </div>
+                      <label *ngIf="!searchedFact.estado" class="form-control"> - </label> -->
+                    </div>
+                  </div>
+                  <!--  Ciudad  -->
+                  <div class="form-group" style="margin-bottom: 0.3rem; position: relative; width: 50%; display: inline-block">
+                    <div class="input-group mb-1">
+                      <div class="input-group-prepend">
+                        <span style="max-width: 100px; min-width: 100px; font-size:0.9em;max-height: 35px;min-height: 35px;" class="input-group-text">Ciudad</span>
+                      </div>
+                      <label  class="form-control"> {{ searchedFact.ciudad }} </label>
+                      <!-- <div *ngFor="let ciu of ciudades">
+                        <label *ngIf="ciu.id == searchedFact.ciudad" class="form-control"> {{ ciu.nombre }} </label>
+                      </div>
+                      <label *ngIf="!searchedFact.ciudad" class="form-control"> - </label> -->
+                    </div>
+                  </div>
+                  <!--  Fecha entrega  -->
+                  <div class="form-group" style="margin-bottom: 0.3rem; position: relative; width: 49%; display: inline-block">
+                    <div class="input-group mb-1">
+                      <div class="input-group-prepend">
+                        <span style="max-width: 100px; min-width: 100px; font-size:0.9em" class="input-group-text">Fecha Entrega</span>
+                      </div>
+                      <label *ngIf="searchedFact.fechaentrega" class="form-control"> {{searchedFact.fechaentrega.substr(0,10)}} </label>
+                      <label *ngIf="!searchedFact.fechaentrega" class="form-control"> - </label>
+                    </div>
+                  </div>
+                  <!--  Estatus  -->
+                  <div class="form-group" style="margin-bottom: 0.3rem; position: relative; width: 50%; display: inline-block">
+                    <div class="input-group mb-1">
+                      <div class="input-group-prepend">
+                        <span style="max-width: 100px; min-width: 100px; font-size:0.9em;max-height: 35px;min-height: 35px;" class="input-group-text">Estatus</span>
+                      </div>
+                      <label class="form-control"> {{searchedFact.statusfact}} </label>
+
+                      <!-- 
+                      <div *ngFor="let sta of status">
+                        <label *ngIf="sta.id == searchedFact.statusfact" class="form-control"> {{sta.nombre}} </label>
+                      </div> -->
+                    </div>
+                  </div>
+                  <div class="col-12 text-center">
+                    <button type="button" class="btn btn-link px-0" [routerLink]="['/login']">¿Ya posee una cuenta? Iniciar Sesión.</button>
+                  </div>
+                  <!--   FIN DEL FORMULARIO   -->
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

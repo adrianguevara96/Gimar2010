@@ -26,6 +26,8 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { FactdetailsComponent } from './views/factdetails/factdetails.component';
+
 
 import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
@@ -99,6 +101,7 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     P500Component,
     LoginComponent,
     RegisterComponent,
+    FactdetailsComponent,
     ModalcrearordenComponent,
     PruebaComponent,
     ModalsolicitudrecolectaComponent,

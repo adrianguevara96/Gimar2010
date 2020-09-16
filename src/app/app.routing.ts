@@ -8,6 +8,8 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { FactdetailsComponent } from './views/factdetails/factdetails.component';
+
 
 import { RoleGuardService } from './guards/role-guard.service';
 import { LoginGuardService } from './guards/login-guard.service';
@@ -44,6 +46,13 @@ export const routes: Routes = [
     component: RegisterComponent,
     data: {
       title: 'Register Page'
+    }
+  },
+  {
+    path: 'factdetails',
+    component: FactdetailsComponent,
+    data: {
+      title: 'Fact Details Page'
     }
   },
   {

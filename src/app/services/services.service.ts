@@ -10,8 +10,11 @@ export class ServicesService {
   url = "https://apijosgarm.herokuapp.com/api/";
   //url = "http://localhost:3001/api/";
   //url = "https://inversionesjosgar.com/api/";
+  //url = "http://playershosting.com:9530/api/";
+  //url = "http://transportegimar.com:9530/api/"
   
   user: any;
+
   business: any = {
     nombre: 'Multiservicios Y Transporte Gimar2010 C.A'
   };

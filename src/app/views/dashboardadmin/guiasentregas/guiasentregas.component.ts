@@ -98,6 +98,7 @@ export class GuiasentregasComponent implements OnInit {
   }
 
   llenarFormularioGuiaEntrega(factura:any,porcentaje:any){
+    //console.log(factura);
     this.guiasEntregaForm.controls['remitente'].setValue(factura.remitente);
     this.guiasEntregaForm.controls['rifremitente'].setValue(factura.rifremitente);
     this.guiasEntregaForm.controls['direccion'].setValue(factura.dirfiscal);
@@ -120,15 +121,19 @@ export class GuiasentregasComponent implements OnInit {
     this.mostrarForm = false;
     this.mostrarTabla = true;
     this.crearGuia = false;
-    this.download();
+    this.generarGuiaEntrega();
   }
 
-  download() {
-    let nrofact = this.factura.nrof; 
-    // LINEA 1
-    let fecha = moment().format('L');
+  generarGuiaEntrega() {
+
+    // ====================  VARIABLES DE LA GUIA DE ENTREGA  ======================
+    //PRE LINEA 1
+    let nrofact = this.factura.nrof;
     let bultos = this.guiasEntregaForm.controls['bultos'].value;
-    // LINEA 2
+    let nroguia = this.factura.nroguia;
+    let fecha = moment().format('L');
+
+    // LINEA 1
     let remitente= this.guiasEntregaForm.controls['remitente'].value;
     let tipoidentificacionremitente:any;
     let tipoidentificaciondestinatario:any;
@@ -140,62 +145,88 @@ export class GuiasentregasComponent implements OnInit {
         tipoidentificaciondestinatario = this.tiposIdentificacion[i].nombre;
       }
     }
-   /* for(let i = 0; i < this.tiposIdentificacion.length; i++){
-
-    }*/
     let rifremitente = `${tipoidentificacionremitente}-${this.factura.rifremitente}`;
     let montofactura = `${this.guiasEntregaForm.controls['monto'].value}`;
+
+    // LINEA 2
+    
     // LINEA 3
-    let direccion = this.factura.dirfiscal;
-    // LINEA 4
     let destinatario = this.factura.destinatario;
     let rifdestinatario = `${tipoidentificaciondestinatario}-${this.factura.rif}`;
     let fletedestino = `${this.factura.fletedestino}`;
-    // LINEA 5
+
+    // LINEA 4
+    //let direccion = this.factura.dirfiscal;
+    let dirdespa = this.factura.direccion;
+    let direcciondespacho = '';
+    let direcciondespacho2 = '';
+    if(dirdespa.length > 44){
+      direcciondespacho = dirdespa.substr(0,44);
+      direcciondespacho2 = dirdespa.substr(44);
+    }else{
+      direcciondespacho = dirdespa.substr(0);
+    }
     let montofletedestino = `${this.guiasEntregaForm.controls['montoflete'].value}`;
-    // LINEA 6
+
+    // LINEA 5
     let montototal = `${this.montototal}`
+
+    // LINEA 6
+    
     // LINEA 7
-    let direccionfiscal = this.factura.dirfiscal;
-    // LINEA 8
-    let direcciondespacho = this.factura.direccion;
-    // LINEA 9
-    let observaciones = this.guiasEntregaForm.controls['observacion'].value;
+    let obser = this.guiasEntregaForm.controls['observacion'].value;
+    let observaciones = '';
+    let observaciones2 = '';
+    //console.log(obser.length)
+    if(obser.length > 90){
+      observaciones = obser.substr(0,90);
+    }
+    if(obser.length > 190){
+      observaciones2 = obser.substr(90);
+    }else{
+      observaciones2 = obser.substr(90);
+    }
+
+    //GUARDAR DOCUMENTO
     var doc = new jspdf('p','cm','letter');
     
-    doc.setFontSize(11);
+    // ====================  TEXTO DE LA GUIA DE ENTREGA  ======================
+    doc.setFontSize(12);
     // ===========================================
-    doc.text(0.5, 2,    '...............................................................2cm.........................................................');
+    //doc.text(0.5, 2,    '...............................................................2cm.........................................................');
     // ================  BODY  ===================
-    doc.text(``, 0.5, 2.5);
-    doc.text(`FACTURA SERIE A`, 0.5, 3);
-    doc.text(`Fecha: ${fecha}`, 8, 3);
-    doc.text(`Bultos: ${bultos}`, 13.5, 3);
+    //PRE LINEA 1
+    doc.text(`# Factura: ${nrofact}`, 7, 2.5);
+    doc.text(`# Bultos: ${bultos}`, 11, 2.5);
+    doc.text(`Guia #: ${nroguia}`, 14, 2.5);
+    doc.text(`Fecha: ${fecha}`, 17, 2.5);
 
-    doc.text(`Remitente: ${remitente}`, 0.5, 3.5);
-    doc.text(`Rif: ${rifremitente}`, 8, 3.5);
-    doc.text(`Monto Factura: ${montofactura} BsS`, 13.5, 3.5);
+    //LINEA 1
+    doc.text(`Remitente: ${remitente}`, 0.5, 3.6);
+    doc.text(`Rif: ${rifremitente}`, 8, 3.6);
+    doc.text(`Monto Factura: ${montofactura} BsS`, 13.5, 3.6);
 
-    doc.text(`Dirección: ${direccion}`, 0.5, 4);
+    //LINEA 2
 
-    doc.text(`Destinatario: ${destinatario}`, 0.5, 5);
-    doc.text(`Rif: ${rifdestinatario}`, 8, 5);
-    doc.text(`Flete destino: ${fletedestino}`, 13.5, 5);
+    //LINEA 3
+    doc.text(`Destinatario: ${destinatario}`, 0.5, 4.8);
+    doc.text(`Rif: ${rifdestinatario}`, 8, 4.8);
+    doc.text(`Flete destino: ${fletedestino}`, 13.5, 4.8);
 
-    doc.text(`Monto Flete: ${montofletedestino} BsS`, 13.5, 5.5);
+    //LINEA 4
+    doc.text(`Dirección Despacho: ${direcciondespacho}`, 0.5, 5.4);
+    doc.text(`Monto Flete: ${montofletedestino} BsS`, 13.5, 5.4);
 
+    //LINEA 5
+    doc.text(`${direcciondespacho2}`, 0.5, 6);
     doc.text(`Monto Total: ${montototal} BsS`, 13.5, 6);
 
-    doc.text(`Dirección Fiscal: ${direccionfiscal}`, 0.5, 6.5);
+    //LINEA 6
 
-    doc.text(`Dirección Despacho: ${direcciondespacho}`, 0.5, 7);
+    //LINEA 7
+    doc.text(`Observaciones: ${observaciones}`, 0.5, 7.2);
+    doc.text(`${observaciones2}`, 0.5, 7.8);
 
-    doc.text(`Observaciones: ${observaciones}`, 0.5, 7.5);
-    // ===========================================
-    doc.text(0.5, 8.3,    '...............................................................8.3cm.........................................................');
-    doc.text(0.5, 9.3,    '...............................................................9.3cm.........................................................');
-    // ===========================================
-    
     // Save the PDF
     doc.save(`Guía de Entrega #${this.factura.nroguia}.pdf`);
   }

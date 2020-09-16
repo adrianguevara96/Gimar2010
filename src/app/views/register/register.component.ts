@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   templateUrl: 'register.component.html'
 })
 export class RegisterComponent implements OnInit {
-  SITE_KEY = "6LcMlcMZAAAAAIT1sNJxf8XD7RDPQIxopFn3MAtE"
+  SITE_KEY = "6LdhwcwZAAAAAMtZTXMiFLDymU0rOWoLM_9OLSTn";
+  SITE_KEY_SERVER = "6LdhwcwZAAAAAJyEVlRNqFsVPAn98BKC5KdNjTSg";
   user:any = {
     nombres: null,
     apellidos: null,
